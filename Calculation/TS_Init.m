@@ -1,4 +1,4 @@
-function TS_Init(INP_ts,whatFeatureSet,beVocal,outputFile)
+function TS_Init(INP_ts,whatFeatureSet,beVocal,outputFile, requestInput)
 % TS_Init  Produces a formatted HCTSA .mat file from input files
 %
 % This function is used instead to run hctsa analysis without a linked mySQL database.
@@ -69,7 +69,7 @@ end
 % ------------------------------------------------------------------------------
 % First check if you're about to overwrite an existing file
 % ------------------------------------------------------------------------------
-if exist(['./',outputFile],'file')
+if exist(['./',outputFile],'file') && requestInput
     reply = input(sprintf(['Warning: %s already exists -- if you continue, this ' ...
         'file will be overwritten.\n[press ''y'' to continue] '],outputFile),'s');
     if ~strcmp(reply,'y')
@@ -104,19 +104,19 @@ end
 % ------------------------------------------------------------------------------
 % Get time series, operations, master operations into structure arrays
 % ------------------------------------------------------------------------------
-TimeSeries = SQL_Add('ts',INP_ts,false,beVocal(1));
+TimeSeries = SQL_Add('ts',INP_ts,false,beVocal(1), false);
 numTS = height(TimeSeries);
 if numTS==0
     return; % The user did not approve of the set of inputs
 end
 
-MasterOperations = SQL_Add('mops',INP_mops,false,beVocal(2));
+MasterOperations = SQL_Add('mops',INP_mops,false,beVocal(2), false);
 numMops = height(MasterOperations);
 if numMops==0
     return; % The user did not approve of the set of inputs
 end
 
-Operations = SQL_Add('ops',INP_ops,false,beVocal(3));
+Operations = SQL_Add('ops',INP_ops,false,beVocal(3), false);
 numOps = height(Operations);
 if numOps==0
     return; % The user did not approve of the set of inputs

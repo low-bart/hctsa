@@ -24,6 +24,7 @@ function startup()
 % ------------------------------------------------------------------------------
 
 % We use this function a bit:
+cd('E:\AbbasCentral\packages\hctsa')
 addfcn = @(x) addpath(fullfile(pwd,x));
 
 fprintf(1,'Adding paths for the highly comparative time-series analysis package...\n')

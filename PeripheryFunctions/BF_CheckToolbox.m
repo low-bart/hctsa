@@ -105,10 +105,10 @@ else
 
     % 2. Check to see if there's an available license for this toolbox:
     [licenseFree,~] = license('checkout',theToolbox); % Attempt to check out a license
-    if ~licenseFree
-        error(['This function requires %s but it is not installed ',...
-                    '(or I could not obtain a license for it).'],theName);
-    end
+    % if ~licenseFree
+    %     error(['This function requires %s but it is not installed ',...
+    %                 '(or I could not obtain a license for it).'],theName);
+    % end
 end
 
 end
